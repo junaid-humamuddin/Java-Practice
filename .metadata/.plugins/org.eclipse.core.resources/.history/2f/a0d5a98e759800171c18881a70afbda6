@@ -1,0 +1,12 @@
+package com.cf.example.excercise2;
+
+class Kinder {
+Kinder() {}
+public Kinder(int x) {
+}
+}
+class Kinder extends Kinder {
+public Kinder(int x) {
+super();
+}
+}

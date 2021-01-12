@@ -1,0 +1,112 @@
+package com.cf.lc.utils;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+import com.adobe.idp.Document;
+import com.adobe.idp.dsc.InvocationRequest;
+import com.adobe.idp.dsc.InvocationResponse;
+import com.adobe.idp.dsc.clientsdk.ServiceClient;
+import com.adobe.idp.dsc.clientsdk.ServiceClientFactory;
+import com.adobe.idp.dsc.clientsdk.ServiceClientFactoryProperties;
+
+public class InvokeLCProcess3 {
+
+	public static void main(String[] args) {
+		try {
+			// Set connection properties required to invoke LiveCycle ES4
+			Properties connectionProps = new Properties();
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_DEFAULT_SOAP_ENDPOINT,
+					"http://localhost:8080");
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_TRANSPORT_PROTOCOL,
+					ServiceClientFactoryProperties.DSC_SOAP_PROTOCOL);
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_SERVER_TYPE, "JBoss");
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_CREDENTIAL_USERNAME, "administrator");
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_CREDENTIAL_PASSWORD, "password");
+
+			// Create a ServiceClientFactory object
+			ServiceClientFactory myFactory = ServiceClientFactory.createInstance(connectionProps);
+
+			// Create a ServiceClient object
+			ServiceClient myServiceClient = myFactory.getServiceClient();
+
+			// Create a Map object to store the XML input parameter value
+			Map params = new HashMap();
+			// Reference a PDF form from which to export data
+			InputStream fileInputStream2 = new FileInputStream(
+					"F:\\Junaid Backup\\ExportPDFData\\ABSS Kelly, Leslie DD577 140324.pdf");
+			ZipEntry entry;
+			ZipInputStream zipStream = new ZipInputStream(stream);
+			if (null != zipStream) {
+
+				while ((entry = zipStream.getNextEntry()) != null) {
+					byte[] bytes = extractEntry(zipStream);
+					if (bytes.length > 0) {
+						Document inputPDF = new Document(toByteArrayFromInputStream(fileInputStream2));
+						if (null != inputPDF) {
+							Map processParams = new HashMap();
+							processParams.put(INPUT_VARIABLE_NAME, inputPDF);
+						}
+					}
+				}
+			
+			
+			//inputPDF.setMaxInlineSize(208169);
+			
+			params.put("inputDoc", inputPDF);
+			
+			/*InputStream fileInputStream2 = new FileInputStream(
+					"F:\\Manish Backup\\C-drive backup\\ExportPDFData\\ABSS Powell, Heather DD577 Term.pdf");
+			
+			InputStream fileInputStream2 = InvokeLCProcess.class.getClassLoader()
+					.getResourceAsStream("ABSS Kelly, Leslie DD577 140324.pdf");
+			
+			Document inputPDF = new Document(fileInputStream2);
+			params.put("inputDoc", inputPDF);*/
+			// Create an InvocationRequest object
+			InvocationRequest lcRequest = myFactory.createInvocationRequest("Test/Process/ExportPDFData", // Specify the
+																											// long-lived
+																											// process
+																											// name
+					"invoke", // Specify the operation name
+					params, // Specify input values
+					true); // Create an asynchronous request
+
+			// Send the invocation request to the long-lived process and
+			// get back an invocation response object
+			InvocationResponse lcResponse = myServiceClient.invoke(lcRequest);
+			Document outputDoc = (Document) lcResponse.getOutputParameter("exportedDataXML");
+			outputDoc.setContentType("application/xml");
+			
+			
+			File file = new File(
+					"F:\\Junaid Backup\\ExportPDFData\\ABSS Kelly, Leslie DD577 140324.pdf.xml");
+
+			outputDoc.copyToFile(file);
+			//outputDoc.dispose();
+			System.out.println("lcResponse: " + outputDoc.getContentType());
+		} catch (Exception e) {
+			System.out.println("The following exception occurred: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int reads = is.read();
+		while (reads != -1) {
+			baos.write(reads);
+			reads = is.read();
+		}
+		return baos.toByteArray();
+	}
+
+}

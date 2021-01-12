@@ -1,0 +1,10 @@
+package journal.dev;
+
+import java.util.List;
+
+public class Fruits {
+	
+	private List<String> fruitsList;
+	
+
+}

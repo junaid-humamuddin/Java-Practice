@@ -1,0 +1,16 @@
+package journal.dev;
+
+public class ConstructorExample {
+	private double re, im;
+	
+	public ConstructorExample(double re, double im) {
+		this.re = re; 
+        this.im = im; 
+	}
+	
+	public static void main(String[] args) {
+		ConstructorExample ce = new ConstructorExample(10, 15);
+		System.out.println(ce);
+	}
+
+}

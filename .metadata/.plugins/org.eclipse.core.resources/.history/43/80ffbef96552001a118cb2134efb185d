@@ -1,0 +1,9 @@
+package journal.dev.test;
+
+public class SuperInheritance {
+
+	public SuperInheritance() {
+		System.out.println("Hello Super");
+	}
+	private String abc="Test";
+}

@@ -1,0 +1,22 @@
+package journal.dev;
+
+public class PrivateConstructor {
+	private static PrivateConstructor instance;
+
+	private PrivateConstructor() {
+	}
+
+	public static PrivateConstructor getInstance() {
+		if (instance == null) {
+			instance = new PrivateConstructor();
+		}
+		return instance;
+	}
+
+	public static void main(String[] args) {
+		PrivateConstructor tester = PrivateConstructor.getInstance();
+		PrivateConstructor tester1 = PrivateConstructor.getInstance();
+		System.out.println(tester.equals(tester1));
+	}
+
+}

@@ -1,0 +1,46 @@
+package com.cf.pdfToXdp;
+
+import java.util.*;
+import com.adobe.livecycle.pdfutility.client.*;
+import java.io.*;
+import com.adobe.idp.Document;
+import com.adobe.idp.dsc.clientsdk.ServiceClientFactory;
+import com.adobe.idp.dsc.clientsdk.ServiceClientFactoryProperties;
+
+public class ConvertPDFToXDP {
+
+	public static void main(String[] args) 
+    { 
+        try 
+        { 
+            //Set connection properties required to invoke AEM Forms                                 
+            Properties connectionProps = new Properties(); 
+            connectionProps.setProperty(ServiceClientFactoryProperties.DSC_DEFAULT_SOAP_ENDPOINT, "localhost:8080/lc"); 
+            connectionProps.setProperty(ServiceClientFactoryProperties.DSC_TRANSPORT_PROTOCOL,ServiceClientFactoryProperties.DSC_SOAP_PROTOCOL);           
+            connectionProps.setProperty(ServiceClientFactoryProperties.DSC_SERVER_TYPE, "JBoss"); 
+            connectionProps.setProperty(ServiceClientFactoryProperties.DSC_CREDENTIAL_USERNAME, "administrator"); 
+            connectionProps.setProperty(ServiceClientFactoryProperties.DSC_CREDENTIAL_PASSWORD, "password"); 
+             
+            // Create a ServiceClientFactory object 
+            ServiceClientFactory myFactory = ServiceClientFactory.createInstance(connectionProps); 
+ 
+            // Create a PDF Utility client 
+            PDFUtilityServiceClient pdfUt = new PDFUtilityServiceClient(myFactory); 
+ 
+            // Specify a PDF document to convert to an XDP file 
+            FileInputStream fileInputStream = new FileInputStream("C:\\Adobe\\Loan.pdf"); 
+            Document inDoc = new Document(fileInputStream); 
+ 
+            // Convert the PDF document to an XDP file 
+            Document myXDP = pdfUt.convertPDFtoXDP(inDoc); 
+ 
+            //Save the returned Document object as an XDP file 
+            File xdpFile = new File("C:\\Adobe\\Loan.xdp"); 
+            myXDP.copyToFile(xdpFile); 
+        } 
+        catch (Exception e) 
+        { 
+            e.printStackTrace(); 
+        } 
+    }
+}

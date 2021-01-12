@@ -1,0 +1,107 @@
+package com.cf.lc.utils;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
+
+import com.adobe.idp.Document;
+import com.adobe.idp.dsc.InvocationRequest;
+import com.adobe.idp.dsc.InvocationResponse;
+import com.adobe.idp.dsc.clientsdk.ServiceClient;
+import com.adobe.idp.dsc.clientsdk.ServiceClientFactory;
+import com.adobe.idp.dsc.clientsdk.ServiceClientFactoryProperties;
+
+public class InvokeLCProcess4 {
+	
+	private static final int BUFFER_SIZE = 1339899;
+	
+	public static void main(String[] args) {
+		try {
+			Properties connectionProps = new Properties();
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_DEFAULT_SOAP_ENDPOINT,
+					"http://localhost:8080");
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_TRANSPORT_PROTOCOL,
+					ServiceClientFactoryProperties.DSC_SOAP_PROTOCOL);
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_SERVER_TYPE, "JBoss");
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_CREDENTIAL_USERNAME, "administrator");
+			connectionProps.setProperty(ServiceClientFactoryProperties.DSC_CREDENTIAL_PASSWORD, "password");
+
+			ServiceClientFactory myFactory = ServiceClientFactory.createInstance(connectionProps);
+
+			ServiceClient myServiceClient = myFactory.getServiceClient();
+
+			ZipFile zipFile = new ZipFile("f:/DD577.zip");
+
+		    Enumeration<? extends ZipEntry> entries = zipFile.entries();
+
+		    while(entries.hasMoreElements()){
+		        ZipEntry entry = entries.nextElement();
+		        System.out.println(entry);
+		        InputStream stream = zipFile.getInputStream(entry);
+		        Document inputPDF = new Document(stream);
+				if (null != inputPDF) {
+					Map processParams = new HashMap();
+					processParams.put("inputDoc", inputPDF);
+					InvocationRequest lcRequest = myFactory.createInvocationRequest("Test/Process/ExportPDFData", "invoke",
+							processParams, true);
+					InvocationResponse lcResponse = myServiceClient.invoke(lcRequest);
+				}
+		    }
+		    zipFile.close();
+		    
+			
+			/*Document inputPDF = new Document(toByteArrayFromInputStream(fileInputStream2));*/
+			// inputPDF.setMaxInlineSize(208169);
+
+			/*params.put("inputDoc", inputPDF);*/
+			/*InvocationRequest lcRequest = myFactory.createInvocationRequest("Test/Process/ExportPDFData", "invoke",
+					params, true);*/
+			/*InvocationResponse lcResponse = myServiceClient.invoke(lcRequest);*/
+			/*Document outputDoc = (Document) lcResponse.getOutputParameter("exportedDataXML");
+			outputDoc.setContentType("application/xml");
+
+			File file = new File("F:\\Junaid Backup\\ExportPDFData\\ABSS Kelly, Leslie DD577 140324.pdf.xml");
+
+			outputDoc.copyToFile(file);
+			System.out.println("lcResponse: " + outputDoc.getContentType());*/
+		} catch (Exception e) {
+			System.out.println("The following exception occurred: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int reads = is.read();
+		while (reads != -1) {
+			baos.write(reads);
+			reads = is.read();
+		}
+		return baos.toByteArray();
+	}
+	
+	private static byte[] extractEntry(InputStream is) throws IOException {
+		try {
+			final byte[] buf = new byte[BUFFER_SIZE];
+			int length;
+			while ((length = is.read(buf, 0, buf.length)) >= 0) {
+				return buf;
+			}
+		} catch (IOException ioex) {
+
+		}
+		return null;
+	}
+
+}

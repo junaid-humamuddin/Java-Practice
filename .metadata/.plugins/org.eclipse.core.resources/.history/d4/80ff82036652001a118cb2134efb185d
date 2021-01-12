@@ -1,0 +1,9 @@
+package journal.dev.test;
+
+public class SubInheritance extends SuperInheritance{
+
+	public SubInheritance() {
+		//super();
+		System.out.println("Hello");
+	}
+}

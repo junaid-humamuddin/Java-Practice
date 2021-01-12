@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="F:/Junaid/JAVA and Training Videos/jars/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="F:/Junaid/JAVA and Training Videos/jars/mysql-connector-java-5.1.21.jar"/>
+	<classpathentry kind="lib" path="F:/Junaid/JAVA and Training Videos/jars/jar_files.zip"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/azure-storage-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (1)/azure-storage-blob-11.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/rxjava-1.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Documents/My Received Files/jfr.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Documents/My Received Files/jfxswt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Documents/My Received Files/javaws.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Documents/My Received Files/jce.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Documents/My Received Files/jsse.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Documents/My Received Files/resources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Documents/My Received Files/rt.jar" sourcepath=""/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/rxjava-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2).zip"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/client-runtime-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/jackson-annotations-2.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/jackson-core-2.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/jackson-databind-2.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/jackson-dataformat-xml-2.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/jackson-datatype-jsr310-2.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/jackson-module-jaxb-annotations-2.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/netty-buffer-4.1.28.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/netty-codec-4.1.28.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/netty-codec-http-4.1.28.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/netty-codec-socks-4.1.28.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/netty-common-4.1.28.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/netty-handler-4.1.28.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/netty-handler-proxy-4.1.28.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/netty-resolver-4.1.28.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/netty-transport-4.1.28.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/reactive-streams-1.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/rxjava-2.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/slf4j-api-1.7.22.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/stax2-api-3.1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Junaid/Downloads/jar_files (2)/woodstox-core-5.0.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
